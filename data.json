@@ -9,7 +9,32 @@
   "redirect_404s_to_homepage": true,
   "use_www_version": true,
   "content": "<h2>Welcome to Eduard Hleba: Your Gateway to Knowledge</h2>\n\n<p>At <strong>eduard.hleba</strong>, we believe in the power of education and the impact it can have on shaping a better future. Our mission is to provide high-quality resources and insights that cater to learners of all ages. Whether you're seeking to expand your knowledge or enhance your skills, you’ve come to the right place!</p>\n\n<h3>Why Choose Eduard Hleba?</h3>\n\n<ul>\n    <li><strong>Diverse Content:</strong> We offer a wide range of topics, ensuring there’s something for everyone.</li>\n    <li><strong>User-Friendly Interface:</strong> Our website is designed for easy navigation, making it simple to find the information you need.</li>\n    <li><strong>Expert Insights:</strong> Our content is crafted by experienced professionals who are passionate about education.</li>\n    <li><strong>Community Engagement:</strong> Join a community of learners where you can share ideas and learn from one another.</li>\n</ul>\n\n<h3>Explore Our Resources</h3>\n\n<p>We provide various educational materials, including:</p>\n\n<ol>\n    <li><a href=\"eduard.hleba/articles\">In-depth Articles</a> - Explore detailed discussions on various subjects.</li>\n    <li><a href=\"eduard.hleba/tutorials\">Step-by-Step Tutorials</a> - Learn new skills with our easy-to-follow guides.</li>\n    <li><a href=\"eduard.hleba/webinars\">Interactive Webinars</a> - Participate in live sessions with experts.</li>\n    <li><a href=\"eduard.hleba/community\">Discussion Forums</a> - Engage with fellow learners and share your knowledge.</li>\n</ol>\n\n<h3>Stay Updated with Our Newsletter</h3>\n\n<p>Never miss an update! Subscribe to our newsletter and receive the latest articles, tutorials, and exclusive content directly in your inbox. <strong>Join our community of learners today!</strong></p>\n\n<h4>Contact Us</h4>\n\n<p>If you have any questions or suggestions, feel free to reach out to us. Your feedback is invaluable in helping us improve our resources. <a href=\"mailto:contact@eduard.hleba\">Contact us here</a>.</p>\n\n<blockquote>\n    <p>\"Education is the most powerful weapon which you can use to change the world.\" – Nelson Mandela</p>\n</blockquote>\n\n<p>Thank you for visiting <strong>eduard.hleba</strong>. We’re excited to support you on your learning journey!</p>",
-  "pages": [],
+  "pages": [
+    {
+      "id": 17,
+      "documentId": "bm57xd3j3ri4a1bdevq6bgkn",
+      "title": "Page",
+      "slug": "page",
+      "content": "fvasdfbgsdfbgsdgf",
+      "seo_title": null,
+      "seo_description": null,
+      "html_head": null,
+      "gpt_prompt": null,
+      "hero_title": null,
+      "hero_subtitle": null,
+      "is_homepage": false,
+      "order": 0,
+      "createdAt": "2026-03-31T15:17:51.346Z",
+      "updatedAt": "2026-03-31T15:18:10.302Z",
+      "publishedAt": null,
+      "locale": null,
+      "template": "default",
+      "faq_title": null,
+      "hero_image": null,
+      "sections": [],
+      "FAQ": []
+    }
+  ],
   "faq_schema": null,
   "hero_title": null,
   "hero_subtitle": null,
@@ -60,8 +85,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-03-31T15:15:46.708Z",
+  "_generated_at": "2026-03-31T15:18:23.466Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-03-31T15:15:47.267Z",
-  "_deploy_trigger": "qwqtb9"
+  "_last_deploy": "2026-03-31T15:18:24.039Z",
+  "_deploy_trigger": "gq4t7im"
 }
