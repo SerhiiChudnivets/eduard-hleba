@@ -35,39 +35,71 @@
       "FAQ": []
     }
   ],
-  "faq_schema": null,
-  "hero_title": null,
-  "hero_subtitle": null,
-  "hero_badge": null,
-  "cta_text": null,
+  "faq_schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "faq 1",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ans 1"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "faq 2",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ans 2"
+        }
+      }
+    ]
+  },
+  "hero_title": "test 1",
+  "hero_subtitle": "test 1 test 1",
+  "hero_badge": "test 12111",
+  "cta_text": "BTN1",
   "accent_color": "#d4af37",
-  "tagline": null,
+  "tagline": "tag",
   "features_list": null,
-  "footer_text": null,
-  "popup_text": null,
+  "footer_text": "adadadad",
+  "popup_text": "popup 1",
   "gpt_prompt": null,
   "subdomains": null,
   "redirect_site": null,
-  "main_background": null,
-  "secondary_background": null,
-  "button_background": null,
-  "button_text": null,
-  "text_color": null,
-  "color_highlight_text": null,
-  "faq_title": null,
-  "login_text": null,
-  "register_text": null,
+  "main_background": "#e01e1e",
+  "secondary_background": "#2738a4",
+  "button_background": "#d9ce38",
+  "button_text": "#b7afaf",
+  "text_color": "#f4f4f4",
+  "color_highlight_text": "#2cdabe",
+  "faq_title": "faq",
+  "login_text": "log",
+  "register_text": "reg",
   "slots_title": null,
   "bonus_title": null,
   "get_bonus_btn_text": null,
-  "color_main_btn_text": null,
+  "color_main_btn_text": "#6b0f70",
   "redirect_link": null,
   "logo": null,
   "popup_logo": null,
   "main_background_img": null,
   "Slots": [],
   "Bonuses": [],
-  "FAQ": [],
+  "FAQ": [
+    {
+      "id": 231,
+      "question": "faq 1",
+      "answer": "ans 1"
+    },
+    {
+      "id": 232,
+      "question": "faq 2",
+      "answer": "ans 2"
+    }
+  ],
   "redirects": [],
   "cloudflare_account": {
     "id": 10,
@@ -85,8 +117,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-03-31T15:18:23.466Z",
+  "_generated_at": "2026-04-01T08:54:04.972Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-03-31T15:18:24.039Z",
-  "_deploy_trigger": "gq4t7im"
+  "_last_deploy": "2026-04-01T08:54:05.505Z",
+  "_deploy_trigger": "psr4q"
 }
