@@ -14,7 +14,7 @@
       "id": 17,
       "documentId": "bm57xd3j3ri4a1bdevq6bgkn",
       "title": "En-EN",
-      "slug": "/en-en/",
+      "slug": "en-en",
       "content": "fvasdfbgsdfbgsdgf",
       "seo_title": "seo-title",
       "seo_description": "seo-descr",
@@ -25,7 +25,7 @@
       "is_homepage": false,
       "order": 0,
       "createdAt": "2026-03-31T15:17:51.346Z",
-      "updatedAt": "2026-04-01T08:57:53.587Z",
+      "updatedAt": "2026-04-01T09:08:05.087Z",
       "publishedAt": null,
       "locale": null,
       "template": "default",
@@ -123,8 +123,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-04-01T08:58:15.714Z",
+  "_generated_at": "2026-04-01T09:08:21.031Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-04-01T08:58:16.263Z",
-  "_deploy_trigger": "9qqd2d"
+  "_last_deploy": "2026-04-01T09:08:21.572Z",
+  "_deploy_trigger": "6vpzba"
 }
