@@ -13,26 +13,32 @@
     {
       "id": 17,
       "documentId": "bm57xd3j3ri4a1bdevq6bgkn",
-      "title": "Page",
-      "slug": "page",
+      "title": "En-EN",
+      "slug": "/en-en/",
       "content": "fvasdfbgsdfbgsdgf",
-      "seo_title": null,
-      "seo_description": null,
+      "seo_title": "seo-title",
+      "seo_description": "seo-descr",
       "html_head": null,
       "gpt_prompt": null,
-      "hero_title": null,
-      "hero_subtitle": null,
+      "hero_title": "test 2",
+      "hero_subtitle": "test 1 test 2",
       "is_homepage": false,
       "order": 0,
       "createdAt": "2026-03-31T15:17:51.346Z",
-      "updatedAt": "2026-03-31T15:18:10.302Z",
+      "updatedAt": "2026-04-01T08:57:53.587Z",
       "publishedAt": null,
       "locale": null,
       "template": "default",
-      "faq_title": null,
+      "faq_title": "faq 2",
       "hero_image": null,
       "sections": [],
-      "FAQ": []
+      "FAQ": [
+        {
+          "id": 235,
+          "question": "faq en",
+          "answer": "anw en"
+        }
+      ]
     }
   ],
   "faq_schema": {
@@ -117,8 +123,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-04-01T08:54:04.972Z",
+  "_generated_at": "2026-04-01T08:58:15.714Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-04-01T08:54:05.505Z",
-  "_deploy_trigger": "psr4q"
+  "_last_deploy": "2026-04-01T08:58:16.263Z",
+  "_deploy_trigger": "9qqd2d"
 }
