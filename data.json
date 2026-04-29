@@ -85,15 +85,272 @@
   "faq_title": "faq",
   "login_text": "log",
   "register_text": "reg",
-  "slots_title": null,
+  "slots_title": "Slots Test",
   "bonus_title": null,
-  "get_bonus_btn_text": null,
+  "get_bonus_btn_text": "Bon bon",
   "color_main_btn_text": "#c2c1c1",
   "redirect_link": null,
-  "logo": null,
-  "popup_logo": null,
-  "main_background_img": null,
-  "Slots": [],
+  "logo": {
+    "id": 116,
+    "name": "logo.webp",
+    "url": "/uploads/logo_e8c8d854f7.webp",
+    "formats": {
+      "small": {
+        "ext": ".webp",
+        "url": "/uploads/small_logo_e8c8d854f7.webp",
+        "hash": "small_logo_e8c8d854f7",
+        "mime": "image/webp",
+        "name": "small_logo.webp",
+        "path": null,
+        "size": 13.25,
+        "width": 500,
+        "height": 140,
+        "sizeInBytes": 13254
+      },
+      "thumbnail": {
+        "ext": ".webp",
+        "url": "/uploads/thumbnail_logo_e8c8d854f7.webp",
+        "hash": "thumbnail_logo_e8c8d854f7",
+        "mime": "image/webp",
+        "name": "thumbnail_logo.webp",
+        "path": null,
+        "size": 5.58,
+        "width": 245,
+        "height": 68,
+        "sizeInBytes": 5580
+      }
+    }
+  },
+  "popup_logo": {
+    "id": 118,
+    "name": "banner.webp",
+    "url": "/uploads/banner_7e6a8b44b7.webp",
+    "formats": {
+      "small": {
+        "ext": ".webp",
+        "url": "/uploads/small_banner_7e6a8b44b7.webp",
+        "hash": "small_banner_7e6a8b44b7",
+        "mime": "image/webp",
+        "name": "small_banner.webp",
+        "path": null,
+        "size": 8.9,
+        "width": 500,
+        "height": 262,
+        "sizeInBytes": 8900
+      },
+      "thumbnail": {
+        "ext": ".webp",
+        "url": "/uploads/thumbnail_banner_7e6a8b44b7.webp",
+        "hash": "thumbnail_banner_7e6a8b44b7",
+        "mime": "image/webp",
+        "name": "thumbnail_banner.webp",
+        "path": null,
+        "size": 3.62,
+        "width": 245,
+        "height": 129,
+        "sizeInBytes": 3620
+      }
+    }
+  },
+  "main_background_img": {
+    "id": 125,
+    "name": "banner.webp",
+    "url": "/uploads/banner_60104d052c.webp",
+    "formats": {
+      "large": {
+        "ext": ".webp",
+        "url": "/uploads/large_banner_60104d052c.webp",
+        "hash": "large_banner_60104d052c",
+        "mime": "image/webp",
+        "name": "large_banner.webp",
+        "path": null,
+        "size": 11.23,
+        "width": 1000,
+        "height": 267,
+        "sizeInBytes": 11232
+      },
+      "small": {
+        "ext": ".webp",
+        "url": "/uploads/small_banner_60104d052c.webp",
+        "hash": "small_banner_60104d052c",
+        "mime": "image/webp",
+        "name": "small_banner.webp",
+        "path": null,
+        "size": 4.22,
+        "width": 500,
+        "height": 133,
+        "sizeInBytes": 4216
+      },
+      "medium": {
+        "ext": ".webp",
+        "url": "/uploads/medium_banner_60104d052c.webp",
+        "hash": "medium_banner_60104d052c",
+        "mime": "image/webp",
+        "name": "medium_banner.webp",
+        "path": null,
+        "size": 7.63,
+        "width": 750,
+        "height": 200,
+        "sizeInBytes": 7626
+      },
+      "thumbnail": {
+        "ext": ".webp",
+        "url": "/uploads/thumbnail_banner_60104d052c.webp",
+        "hash": "thumbnail_banner_60104d052c",
+        "mime": "image/webp",
+        "name": "thumbnail_banner.webp",
+        "path": null,
+        "size": 1.5,
+        "width": 245,
+        "height": 65,
+        "sizeInBytes": 1502
+      }
+    }
+  },
+  "Slots": [
+    {
+      "id": 41,
+      "Name": "slots 1",
+      "link": "#",
+      "logo": [
+        {
+          "id": 112,
+          "name": "logo.webp",
+          "url": "/uploads/logo_e3274912de.webp",
+          "formats": {
+            "thumbnail": {
+              "ext": ".webp",
+              "url": "/uploads/thumbnail_logo_e3274912de.webp",
+              "hash": "thumbnail_logo_e3274912de",
+              "mime": "image/webp",
+              "name": "thumbnail_logo.webp",
+              "path": null,
+              "size": 5.75,
+              "width": 156,
+              "height": 156,
+              "sizeInBytes": 5746
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "Name": "slots 2",
+      "link": "#",
+      "logo": [
+        {
+          "id": 79,
+          "name": "logo.webp",
+          "url": "/uploads/logo_53ad5f238b.webp",
+          "formats": {
+            "thumbnail": {
+              "ext": ".webp",
+              "url": "/uploads/thumbnail_logo_53ad5f238b.webp",
+              "hash": "thumbnail_logo_53ad5f238b",
+              "mime": "image/webp",
+              "name": "thumbnail_logo.webp",
+              "path": null,
+              "size": 8.62,
+              "width": 245,
+              "height": 122,
+              "sizeInBytes": 8622
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "Name": "slots 3",
+      "link": "#",
+      "logo": [
+        {
+          "id": 112,
+          "name": "logo.webp",
+          "url": "/uploads/logo_e3274912de.webp",
+          "formats": {
+            "thumbnail": {
+              "ext": ".webp",
+              "url": "/uploads/thumbnail_logo_e3274912de.webp",
+              "hash": "thumbnail_logo_e3274912de",
+              "mime": "image/webp",
+              "name": "thumbnail_logo.webp",
+              "path": null,
+              "size": 5.75,
+              "width": 156,
+              "height": 156,
+              "sizeInBytes": 5746
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "Name": "slots 4",
+      "link": "#",
+      "logo": [
+        {
+          "id": 14,
+          "name": "Gates-of-Olympus_500x560_D-W.jpg",
+          "url": "/uploads/Gates_of_Olympus_500x560_D_W_13d37ae1bd.jpg",
+          "formats": {
+            "small": {
+              "ext": ".jpg",
+              "url": "/uploads/small_Gates_of_Olympus_500x560_D_W_13d37ae1bd.jpg",
+              "hash": "small_Gates_of_Olympus_500x560_D_W_13d37ae1bd",
+              "mime": "image/jpeg",
+              "name": "small_Gates-of-Olympus_500x560_D-W.jpg",
+              "path": null,
+              "size": 56.42,
+              "width": 446,
+              "height": 500,
+              "sizeInBytes": 56422
+            },
+            "thumbnail": {
+              "ext": ".jpg",
+              "url": "/uploads/thumbnail_Gates_of_Olympus_500x560_D_W_13d37ae1bd.jpg",
+              "hash": "thumbnail_Gates_of_Olympus_500x560_D_W_13d37ae1bd",
+              "mime": "image/jpeg",
+              "name": "thumbnail_Gates-of-Olympus_500x560_D-W.jpg",
+              "path": null,
+              "size": 8.68,
+              "width": 139,
+              "height": 156,
+              "sizeInBytes": 8681
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "Name": "slots 5",
+      "link": "#",
+      "logo": [
+        {
+          "id": 112,
+          "name": "logo.webp",
+          "url": "/uploads/logo_e3274912de.webp",
+          "formats": {
+            "thumbnail": {
+              "ext": ".webp",
+              "url": "/uploads/thumbnail_logo_e3274912de.webp",
+              "hash": "thumbnail_logo_e3274912de",
+              "mime": "image/webp",
+              "name": "thumbnail_logo.webp",
+              "path": null,
+              "size": 5.75,
+              "width": 156,
+              "height": 156,
+              "sizeInBytes": 5746
+            }
+          }
+        }
+      ]
+    }
+  ],
   "Bonuses": [],
   "FAQ": [
     {
@@ -124,8 +381,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-04-29T14:09:40.531Z",
+  "_generated_at": "2026-04-29T14:14:10.525Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-04-29T14:09:41.124Z",
-  "_deploy_trigger": "8c383q"
+  "_last_deploy": "2026-04-29T14:14:11.063Z",
+  "_deploy_trigger": "sfy9le"
 }
