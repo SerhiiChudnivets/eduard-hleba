@@ -64,7 +64,7 @@
       }
     ]
   },
-  "hero_title": "test 122",
+  "hero_title": "test 12222",
   "hero_subtitle": "test 1 test 1",
   "hero_badge": "test 12111",
   "cta_text": "BTN1",
@@ -124,8 +124,8 @@
   },
   "header_menu": [],
   "footer_menu": [],
-  "_generated_at": "2026-04-29T13:56:41.349Z",
+  "_generated_at": "2026-04-29T14:09:40.531Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-04-29T13:56:41.888Z",
-  "_deploy_trigger": "nhfl2g"
+  "_last_deploy": "2026-04-29T14:09:41.124Z",
+  "_deploy_trigger": "8c383q"
 }
