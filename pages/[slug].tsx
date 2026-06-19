@@ -33,6 +33,7 @@ interface PageData {
   seo_title?: string
   seo_description?: string
   html_head?: string
+  htmlHead?: string
   hero_title?: string
   hero_subtitle?: string
   hero_badge?: string

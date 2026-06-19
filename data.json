@@ -79,6 +79,7 @@
   "bonus_title": null,
   "get_bonus_btn_text": null,
   "redirect_link": null,
+  "home_name": "Front Page",
   "subdomains": null,
   "accent_color": "#d4af37",
   "main_background": "#e01e1e",
@@ -116,8 +117,8 @@
       "question": "faq 2"
     }
   ],
-  "_generated_at": "2026-06-11T11:22:11.697Z",
+  "_generated_at": "2026-06-19T15:17:18.619Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-06-11T11:22:12.262Z",
-  "_deploy_trigger": "r56u8"
+  "_last_deploy": "2026-06-19T15:17:19.226Z",
+  "_deploy_trigger": "rfw5hi"
 }

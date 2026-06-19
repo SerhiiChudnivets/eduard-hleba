@@ -48,10 +48,17 @@ interface FaqItem {
   answer: string
 }
 
+interface FooterImage {
+  id?: number
+  link?: string
+  image?: string | MediaFile | MediaFile[] | null
+}
+
 interface CasinoData {
   // Базові поля
   name: string
   html_head?: string
+  htmlHead?: string
   seoTitle?: string
   seo_title?: string
   seoDescription?: string
@@ -100,6 +107,8 @@ interface CasinoData {
   Bonuses?: Bonus[]
   header_menu?: MenuItem[]
   footer_menu?: MenuItem[]
+  footer_images?: FooterImage[]
+  footerImages?: FooterImage[]
   
   // Metadata
   _generated_at?: string
@@ -160,7 +169,7 @@ const styles = `
   }
   .logo-image{
     width: 100%;
-    height: 60px;
+    height: 45px;
   }
   .logo-icon {
     width: 2rem;
@@ -177,6 +186,20 @@ const styles = `
   .header-buttons {
     display: flex;
     gap: 0.75rem;
+  }
+
+  .burger-button,
+  .nav-close {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--foreground);
+    cursor: pointer;
   }
 
   .btn {
@@ -215,11 +238,6 @@ const styles = `
   }
 
   /* Navigation Styles */
-  .nav-content{
-    border-top: 1px solid var(--border);
-   
-  }
-  
   .nav-content li{
     list-style-type: none;
   }
@@ -229,7 +247,6 @@ const styles = `
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    padding: 0.75rem 0;
     overflow-x: auto;
      color: var(--primary);
   }
@@ -397,7 +414,12 @@ const styles = `
   }
 
   .btn-hero {
+    background: var(--cta-bg);
     box-shadow: 0 0 30px hsla(var(--button-bg), 0.4);
+  }
+
+  .bonus-popup .color-main-btn {
+    background: var(--cta-bg);
   }
   
   .color-main-btn{
@@ -631,6 +653,14 @@ const styles = `
     opacity: 0.8;
   }
 
+  .content-wrapper img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0.5rem;
+  }
+
   .content-wrapper ul, .content-wrapper ol {
     margin: 1.5rem 0;
     padding-left: 2rem;
@@ -796,6 +826,7 @@ const styles = `
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    flex-wrap: wrap;
   }
 
   .cert-item {
@@ -804,6 +835,24 @@ const styles = `
     gap: 0.5rem;
     color: var(--muted-foreground);
     font-size: 0.875rem;
+  }
+
+  .footer-certification-link {
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-certification-link:hover {
+    opacity: 0.8;
+  }
+
+  .footer-certification-image {
+    display: block;
+    max-width: 160px;
+    max-height: 42px;
+    object-fit: contain;
   }
 
   .age-badge {
@@ -953,6 +1002,113 @@ const styles = `
 
   /* Responsive */
   @media (max-width: 768px) {
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    header {
+      backdrop-filter: none;
+    }
+
+    .header-content {
+      position: relative;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem 3.25rem 1rem;
+    }
+
+    .header-content .logo {
+      justify-content: center;
+    }
+
+    .header-buttons {
+      justify-content: center;
+      flex-wrap: wrap;
+      order: 2;
+    }
+
+    .burger-button {
+      display: flex;
+      position: absolute;
+      top: 1rem;
+      right: 0;
+      z-index: 1001;
+    }
+
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      bottom: 0;
+      width: min(82vw, 320px);
+      height: 100vh;
+      min-height: 100dvh;
+      max-height: 100dvh;
+      padding: 4.5rem 1.25rem 1.25rem;
+      background: color-mix(in srgb, var(--secondary) 92%, #000);
+      border-left: 1px solid var(--border);
+      box-shadow: -18px 0 40px rgba(0, 0, 0, 0.35);
+      transition: right 0.25s ease;
+      z-index: 5000;
+      isolation: isolate;
+      overflow-y: auto;
+    }
+
+    .nav-bar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: color-mix(in srgb, var(--secondary) 92%, #000);
+      z-index: -1;
+    }
+
+    .nav-bar.open {
+      right: 0;
+    }
+
+    .nav-close {
+      display: flex;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    .nav-content {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 1rem;
+      overflow: visible;
+      position: relative;
+      z-index: 1;
+      background: color-mix(in srgb, var(--secondary) 92%, #000);
+    }
+
+    .menu-item {
+      width: 100%;
+    }
+
+    .nav-link {
+      width: 100%;
+      font-size: 1.05rem;
+    }
+
+    .submenu {
+      position: static;
+      min-width: 0;
+      margin-top: 0.5rem;
+      padding: 0 0 0 1rem;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
     .hero-title {
       font-size: 2.5rem;
     }
@@ -979,7 +1135,7 @@ const styles = `
       padding: 1rem 0;
     }
     .popup-content .logo-image{
-      height: 45px;
+      height: 30px;
     }
     .popup-text {
       font-size: 0.775rem;
@@ -1006,6 +1162,14 @@ const styles = `
     .content-wrapper {
       font-size: 1rem;
     }
+
+    .content-wrapper img {
+      float: none !important;
+      margin: 1.25rem auto !important;
+      max-width: 100%;
+      height: auto;
+    }
+
     .faq-list, .section-title{
       width: 100%;
     }
@@ -1016,7 +1180,7 @@ const styles = `
 `;
 export default function TupchiyTemplate() {
   const data: CasinoData = require('../data.json')
-  const htmlHeadContent = data.html_head || '';
+  const htmlHeadContent = data.html_head || data.htmlHead || '';
   const extractMetaDescription = (html: string): string => {
     if (!html) return ''
     const descriptionMatch =
@@ -1030,48 +1194,70 @@ export default function TupchiyTemplate() {
 
   // Функція для парсингу htmlHeadContent
   const renderHeadTags = (html: string) => {
-    if (typeof document === 'undefined') return null;
+    const normalizeAttributeName = (name: string) => {
+      if (name === 'charset') return 'charSet'
+      if (name === 'http-equiv') return 'httpEquiv'
+      if (name === 'crossorigin') return 'crossOrigin'
+      return name
+    }
 
-    const temp = document.createElement('div');
-    temp.innerHTML = html;
+    const parseAttributes = (source: string) => {
+      const attrs: Record<string, string | boolean> = {}
+      const attrRegex = /([\w:-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+)))?/g
+      let match: RegExpExecArray | null
 
-    return Array.from(temp.children).map((child, i) => {
-      if (!(child instanceof HTMLElement)) return null;
+      while ((match = attrRegex.exec(source)) !== null) {
+        const name = normalizeAttributeName(match[1].toLowerCase())
+        attrs[name] = match[2] ?? match[3] ?? match[4] ?? true
+      }
 
-      const tagName = child.tagName.toLowerCase();
-      const attributes = Array.from(child.attributes) as Attr[];
+      return attrs
+    }
+
+    const tags: React.ReactNode[] = []
+    const tagRegex = /<script\b([^>]*)>([\s\S]*?)<\/script>|<(meta|link)\b([^>]*)\/?>/gi
+    let match: RegExpExecArray | null
+
+    while ((match = tagRegex.exec(html)) !== null) {
+      const isScript = match[1] !== undefined
+      const tagName = isScript ? 'script' : match[3]?.toLowerCase()
+      const attrs = parseAttributes(isScript ? match[1] : match[4])
+      const key = tags.length
 
       if (tagName === 'meta') {
-        const metaName = child.getAttribute('name')?.toLowerCase()
-        if (metaName === 'description') return null
-        return <meta key={i} {...Object.fromEntries(attributes.map(a => [a.name, a.value]))} />;
+        const metaName = typeof attrs.name === 'string' ? attrs.name.toLowerCase() : ''
+        if (metaName === 'description') continue
+        tags.push(<meta key={key} {...attrs} />)
       }
 
       if (tagName === 'link') {
-        return <link key={i} {...Object.fromEntries(attributes.map(a => [a.name, a.value]))} />;
+        tags.push(<link key={key} {...attrs} />)
       }
 
       if (tagName === 'script') {
-        return (
+        tags.push(
             <script
-                key={i}
-                {...Object.fromEntries(attributes.map(a => [a.name, a.value]))}
-                dangerouslySetInnerHTML={{ __html: child.innerHTML }}
+                key={key}
+                {...attrs}
+                dangerouslySetInnerHTML={{ __html: match[2] || '' }}
             />
-        );
+        )
       }
+    }
 
-      return null;
-    });
+    return tags
   };
   const [slotStartIndex, setSlotStartIndex] = useState(0)
   const [bonusStartIndex, setBonusStartIndex] = useState(0)
   const [showPopup, setShowPopup] = useState(false)
+  const [isPopupDismissed, setIsPopupDismissed] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Отримуємо кольори з data або використовуємо дефолтні
   const mainBackground = data.main_background || '#1a202c' // default dark blue
   const secondaryBackground = data.secondary_background || '#2d3748' // default darker blue
   const buttonBackground = data.button_background || '#f59e0b' // default amber
+  const ctaBackground = data.cta_background || buttonBackground
   const buttonText = data.button_text || '#1a202c' // default dark
   const textColor = data.text_color || '#f7fafc' // default light
   const colorHighlightText = data.color_highlight_text || '#f59e0b'
@@ -1137,6 +1323,7 @@ export default function TupchiyTemplate() {
       --border: ${colorHighlightText}33; /* with opacity */
       --radius: 0.5rem;
       --button-bg: ${buttonBackground};
+      --cta-bg: ${ctaBackground};
       --button-text: ${buttonText};
       --color-main-btn: ${colorMainBtnText};
     }
@@ -1149,14 +1336,14 @@ export default function TupchiyTemplate() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.5) {
+      if (!isPopupDismissed && window.scrollY > window.innerHeight * 0.5) {
         setShowPopup(true)
       }
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isPopupDismissed])
 
 
   const visibleSlots = 5
@@ -1192,6 +1379,12 @@ export default function TupchiyTemplate() {
     if (typeof media === 'object' && 'url' in media) return media.url || ''
     return ''
   }
+  const footerImages = (Array.isArray(data.footer_images) ? data.footer_images : data.footerImages || [])
+      .map((item) => ({
+        ...item,
+        imageUrl: getMediaUrl(item.image || undefined),
+      }))
+      .filter((item) => item.imageUrl)
 
     const backgroundImage = getMediaUrl(data.main_background_img);
 
@@ -1251,6 +1444,57 @@ export default function TupchiyTemplate() {
                   <img src={getMediaUrl(data.logo)} alt={siteName} className="logo-image"/>
                 </a>
               </div>
+              <nav className={`nav-bar ${isMobileMenuOpen ? 'open' : ''}`}>
+                <button
+                    type="button"
+                    className="nav-close"
+                    aria-label="Close menu"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                <ul className="nav-content">
+                  {data.header_menu && data.header_menu.length > 0 ? (
+                      data.header_menu.map((item, index) => (
+                          <li key={item.id || index} className="menu-item">
+                            <a
+                                href={item.link && item.link.trim() ? item.link : redirectLink}
+                                className="nav-link"
+                                target={item.open_in_new_tab ? '_blank' : '_self'}
+                                rel={item.open_in_new_tab ? 'noopener noreferrer' : undefined}
+                            >
+                              {item.label}
+                              {item.submenu && item.submenu.length > 0 && (
+                                  <span className="menu-arrow">▼</span>
+                              )}
+                            </a>
+                            {item.submenu && item.submenu.length > 0 && (
+                                <div className="submenu">
+                                  {item.submenu.map((subitem, subindex) => (
+                                      <a
+                                          key={subitem.id || subindex}
+                                          href={subitem.link && subitem.link.trim() ? subitem.link : redirectLink}
+                                          target={subitem.open_in_new_tab ? '_blank' : '_self'}
+                                          rel={subitem.open_in_new_tab ? 'noopener noreferrer' : undefined}
+                                      >
+                                        {subitem.label}
+                                      </a>
+                                  ))}
+                                </div>
+                            )}
+                          </li>
+                      ))
+                  ) : (
+                      <>
+                        <li><a href="#home" className="nav-link">Home</a></li>
+                        <li><a href="#slots" className="nav-link">Slots</a></li>
+                        <li><a href="#bonuses" className="nav-link">Bonuses</a></li>
+                      </>
+                  )}
+                </ul>
+              </nav>
               <div className="header-buttons">
                 {loginText && (
                     <button
@@ -1276,51 +1520,19 @@ export default function TupchiyTemplate() {
                     </button>
                 )}
               </div>
+              <button
+                  type="button"
+                  className="burger-button"
+                  aria-label="Open menu"
+                  aria-expanded={isMobileMenuOpen}
+                  onClick={() => setIsMobileMenuOpen(true)}
+              >
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
             </div>
           </div>
-          <nav className="nav-bar">
-            <div className="container">
-              <ul className="nav-content">
-                {data.header_menu && data.header_menu.length > 0 ? (
-                    data.header_menu.map((item, index) => (
-                        <li key={item.id || index} className="menu-item">
-                          <a
-                              href={item.link && item.link.trim() ? item.link : redirectLink}
-                              className="nav-link"
-                              target={item.open_in_new_tab ? '_blank' : '_self'}
-                              rel={item.open_in_new_tab ? 'noopener noreferrer' : undefined}
-                          >
-                            {item.label}
-                            {item.submenu && item.submenu.length > 0 && (
-                                <span className="menu-arrow">▼</span>
-                            )}
-                          </a>
-                          {item.submenu && item.submenu.length > 0 && (
-                              <div className="submenu">
-                                {item.submenu.map((subitem, subindex) => (
-                                    <a
-                                        key={subitem.id || subindex}
-                                        href={subitem.link && subitem.link.trim() ? subitem.link : redirectLink}
-                                        target={subitem.open_in_new_tab ? '_blank' : '_self'}
-                                        rel={subitem.open_in_new_tab ? 'noopener noreferrer' : undefined}
-                                    >
-                                      {subitem.label}
-                                    </a>
-                                ))}
-                              </div>
-                          )}
-                        </li>
-                    ))
-                ) : (
-                    <>
-                      <li><a href="#home" className="nav-link">Home</a></li>
-                      <li><a href="#slots" className="nav-link">Slots</a></li>
-                      <li><a href="#bonuses" className="nav-link">Bonuses</a></li>
-                    </>
-                )}
-              </ul>
-            </div>
-          </nav>
         </header>
 
 
@@ -1575,13 +1787,33 @@ export default function TupchiyTemplate() {
                 </div>
 
                 <div className="footer-certifications">
-                  <div className="cert-item">
-                    <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                    <span>FairPlay</span>
-                  </div>
-                  <div className="age-badge">18+</div>
+                  {footerImages.length > 0 ? (
+                      footerImages.map((item, index) => (
+                          <a
+                              key={item.id || index}
+                              href={item.link || '#'}
+                              className="footer-certification-link"
+                              target="_blank"
+                              rel="nofollow"
+                          >
+                            <img
+                                src={item.imageUrl}
+                                alt={`Footer certification ${index + 1}`}
+                                className="footer-certification-image"
+                            />
+                          </a>
+                      ))
+                  ) : (
+                      <>
+                        <div className="cert-item">
+                          <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                          </svg>
+                          <span>FairPlay</span>
+                        </div>
+                        <div className="age-badge">18+</div>
+                      </>
+                  )}
                 </div>
 
                 <div className="footer-links">
@@ -1651,7 +1883,13 @@ export default function TupchiyTemplate() {
                 >
                   {getBonusBtn}
                 </button>
-                <button className="btn-close" onClick={() => setShowPopup(false)}>
+                <button
+                    className="btn-close"
+                    onClick={() => {
+                      setShowPopup(false)
+                      setIsPopupDismissed(true)
+                    }}
+                >
                   <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
