@@ -23,11 +23,11 @@
       "heroTitle": "heading page",
       "heroSubtitle": "ingo page baner",
       "heroImage": "",
-      "template": "landing",
+      "template": "homepage",
       "isHomepage": false,
       "order": 0,
       "lang": "",
-      "faqTitle": "",
+      "faqTitle": "faq",
       "sections": null,
       "faq": [
         {
@@ -37,7 +37,12 @@
       ],
       "websiteId": 100,
       "createdAt": {},
-      "updatedAt": {}
+      "updatedAt": {},
+      "hero_title": "test 1",
+      "hero_subtitle": "test 1 test 1",
+      "seo_title": "title front page",
+      "seo_description": "descr front page",
+      "faq_title": "faq"
     }
   ],
   "faq_schema": {
@@ -117,8 +122,8 @@
       "question": "faq 2"
     }
   ],
-  "_generated_at": "2026-06-19T15:17:18.619Z",
+  "_generated_at": "2026-06-22T12:37:51.399Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-06-19T15:17:19.226Z",
-  "_deploy_trigger": "rfw5hi"
+  "_last_deploy": "2026-06-22T12:37:51.933Z",
+  "_deploy_trigger": "s1uxe6"
 }
