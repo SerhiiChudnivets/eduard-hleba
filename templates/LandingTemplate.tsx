@@ -28,6 +28,7 @@ interface PageData {
   name: string
   html_head?: string
   htmlHead?: string
+  htmlhead?: string
   url: string
   template?: string
   language_code: string
@@ -64,6 +65,7 @@ interface PageData {
   bonus_title?: string
   get_bonus_btn_text?: string
   redirect_link?: string
+  home_name?: string
 
   // Колірні теми
   main_background?: string
@@ -99,6 +101,7 @@ interface SiteData {
   name: string
   html_head?: string
   htmlHead?: string
+  htmlhead?: string
   url: string
   template?: string
   language_code: string
@@ -134,6 +137,7 @@ interface SiteData {
   bonus_title?: string
   get_bonus_btn_text?: string
   redirect_link?: string
+  home_name?: string
 
   // Колірні теми
   main_background?: string
@@ -1116,7 +1120,16 @@ const styles = `
     }
 
     header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       backdrop-filter: none;
+      z-index: 6000;
+    }
+
+    header + * {
+      margin-top: 150px;
     }
 
     .header-content {
@@ -1289,8 +1302,20 @@ const styles = `
 
 export default function LandingTemplate({ page, site }: { page: PageData; site: SiteData }) {
   const siteName = site.site_name || site.name
-  const data: PageData = require('../data.json')
-  const htmlHeadContent = page.html_head || page.htmlHead || '';
+  const data: SiteData = require('../data.json')
+  const getHtmlHeadContent = () => {
+    const pageSlug = page.slug?.replace(/^\/|\/$/g, '')
+    const sourcePage = Array.isArray(data.pages)
+        ? data.pages.find((item) => item.slug?.replace(/^\/|\/$/g, '') === pageSlug)
+        : undefined
+    const pageHtmlHead = [sourcePage?.htmlHead, sourcePage?.html_head, sourcePage?.htmlhead, page.htmlHead, page.html_head, page.htmlhead]
+        .find((value) => typeof value === 'string' && value.trim())
+    const dataHtmlHead = [data.html_head, data.htmlHead, data.htmlhead]
+        .find((value) => typeof value === 'string' && value.trim())
+
+    return pageHtmlHead || dataHtmlHead || ''
+  }
+  const htmlHeadContent = getHtmlHeadContent()
   const extractMetaDescription = (html: string): string => {
     if (!html) return ''
     const descriptionMatch =
@@ -1325,6 +1350,7 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
     }
 
     const tags: React.ReactNode[] = []
+    const seenHeadTags = new Set<string>()
     const tagRegex = /<script\b([^>]*)>([\s\S]*?)<\/script>|<(meta|link)\b([^>]*)\/?>/gi
     let match: RegExpExecArray | null
 
@@ -1336,12 +1362,21 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
 
       if (tagName === 'meta') {
         const metaName = typeof attrs.name === 'string' ? attrs.name.toLowerCase() : ''
+        const metaProperty = typeof attrs.property === 'string' ? attrs.property.toLowerCase() : ''
+        const metaHttpEquiv = typeof attrs.httpEquiv === 'string' ? attrs.httpEquiv.toLowerCase() : ''
+        const metaKey = metaName || metaProperty || metaHttpEquiv || (attrs.charSet ? 'charset' : '')
         if (metaName === 'description') continue
-        tags.push(<meta key={key} {...attrs} />)
+        if (metaKey && seenHeadTags.has(`meta:${metaKey}`)) continue
+        if (metaKey) seenHeadTags.add(`meta:${metaKey}`)
+        tags.push(<meta key={metaKey ? `meta:${metaKey}` : key} {...attrs} />)
       }
 
       if (tagName === 'link') {
-        tags.push(<link key={key} {...attrs} />)
+        const linkRel = typeof attrs.rel === 'string' ? attrs.rel.toLowerCase() : ''
+        const linkKey = linkRel === 'canonical' ? 'link:canonical' : `link:${linkRel}:${attrs.href || key}`
+        if (seenHeadTags.has(linkKey)) continue
+        seenHeadTags.add(linkKey)
+        tags.push(<link key={linkKey} {...attrs} />)
       }
 
       if (tagName === 'script') {
@@ -1396,6 +1431,7 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
   const getBonusBtn = data.get_bonus_btn_text || 'Get Bonus'
   const redirectLink = data.redirect_link || ''
   const showBreadcrumbs = data.breadcrumbs === true
+  const homeBreadcrumbName = data.home_name || 'Home'
   const formatBreadcrumbTitle = () => {
     const fallback = page.slug
         ? page.slug.replace(/^\/|\/$/g, '').replace(/[-_]+/g, ' ')
@@ -1501,8 +1537,6 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
                           <a
                               href={item.link && item.link.trim() ? item.link : redirectLink}
                               className="nav-link"
-                              target={item.open_in_new_tab ? '_blank' : '_self'}
-                              rel={item.open_in_new_tab ? 'noopener noreferrer' : undefined}
                           >
                             {item.label}
                             {item.submenu && item.submenu.length > 0 && (
@@ -1515,8 +1549,6 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
                                     <a
                                         key={subitem.id || subindex}
                                         href={subitem.link && subitem.link.trim() ? subitem.link : redirectLink}
-                                        target={subitem.open_in_new_tab ? '_blank' : '_self'}
-                                        rel={subitem.open_in_new_tab ? 'noopener noreferrer' : undefined}
                                     >
                                       {subitem.label}
                                     </a>
@@ -1540,7 +1572,7 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
                       className="btn btn-outline"
                       onClick={() => {
                         const link = redirectLink ? redirectLink : '/';
-                        window.open(link, '_blank');
+                        window.location.href = link;
                       }}
                   >
                     {loginText}
@@ -1552,7 +1584,7 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
                       className="btn btn-primary"
                       onClick={() => {
                         const link = redirectLink ? redirectLink : '/';
-                        window.open(link, '_blank');
+                        window.location.href = link;
                       }}
                   >
                     {registerText}
@@ -1578,7 +1610,7 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
           <section className="breadcrumbs-section" aria-label="Breadcrumb">
             <div className="container">
               <nav className="breadcrumbs">
-                <a href="/">Home</a>
+                <a href="/">{homeBreadcrumbName}</a>
                 <span className="breadcrumbs-separator">{'\u00bb'}</span>
                 <span className="breadcrumbs-current">{currentPageTitle}</span>
               </nav>
@@ -1615,7 +1647,7 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
                 className="btn btn-primary btn-lg btn-hero color-main-btn"
                 onClick={() => {
                   const link = redirectLink ? redirectLink : '/';
-                  window.open(link, '_blank');
+                  window.location.href = link;
                 }}
             >
               {ctaText}
@@ -1745,8 +1777,6 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
                           <a
                               href={item.link && item.link.trim() ? item.link : redirectLink}
                               className="footer-link"
-                              target={(item.open_in_new_tab || item.openInNewTab) ? '_blank' : '_self'}
-                              rel={(item.open_in_new_tab || item.openInNewTab) ? 'noopener noreferrer' : undefined}
                           >
                             {item.label}
                           </a>
@@ -1756,8 +1786,6 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
                                     <a
                                         key={subitem.id || subindex}
                                         href={subitem.link && subitem.link.trim() ? subitem.link : redirectLink}
-                                        target={(subitem.open_in_new_tab || subitem.openInNewTab) ? '_blank' : '_self'}
-                                        rel={(subitem.open_in_new_tab || subitem.openInNewTab) ? 'noopener noreferrer' : undefined}
                                     >
                                       {subitem.label}
                                     </a>
@@ -1799,7 +1827,7 @@ export default function LandingTemplate({ page, site }: { page: PageData; site: 
                   className="btn btn-primary color-main-btn"
                   onClick={() => {
                     const link = redirectLink ? redirectLink : '/';
-                    window.open(link, '_blank');
+                    window.location.href = link;
                   }}
               >
                 {getBonusBtn}

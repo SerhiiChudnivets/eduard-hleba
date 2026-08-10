@@ -3,7 +3,7 @@
   "site_name": "title front page",
   "html_head": "",
   "url": "eduard.hleba",
-  "template": "tupchiy",
+  "template": "review",
   "language_code": "en",
   "allow_indexing": false,
   "redirect_404s_to_homepage": true,
@@ -112,6 +112,7 @@
   ],
   "Slots": null,
   "Bonuses": null,
+  "Reviews": null,
   "FAQ": [
     {
       "answer": "ans 1",
@@ -122,8 +123,8 @@
       "question": "faq 2"
     }
   ],
-  "_generated_at": "2026-06-22T12:37:51.399Z",
+  "_generated_at": "2026-08-10T14:54:55.134Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-06-22T12:37:51.933Z",
-  "_deploy_trigger": "s1uxe6"
+  "_last_deploy": "2026-08-10T14:54:55.722Z",
+  "_deploy_trigger": "2nj1md"
 }

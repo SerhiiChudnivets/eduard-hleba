@@ -42,6 +42,14 @@ interface Bonus {
   link?: string
 }
 
+interface ReviewItem {
+  name?: string
+  logo?: string | MediaFile | MediaFile[]
+  bonus?: string
+  rating?: string
+  link?: string
+}
+
 interface FaqItem {
   id?: number
   question: string
@@ -105,6 +113,7 @@ interface CasinoData {
   // Repeatable components
   Slots?: Slot[]
   Bonuses?: Bonus[]
+  Reviews?: ReviewItem[]
   header_menu?: MenuItem[]
   footer_menu?: MenuItem[]
   footer_images?: FooterImage[]
@@ -532,6 +541,142 @@ const styles = `
     color: var(--primary);
     font-weight: 700;
     font-size: 1.125rem;
+  }
+
+  /* Reviews Section */
+  .reviews-section {
+    padding: 4rem 0;
+    background: var(--background);
+  }
+
+  .reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .review-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .review-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .review-card-index {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 2rem;
+    text-align: center;
+  }
+
+  .review-card-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: var(--background);
+    flex-shrink: 0;
+  }
+
+  .review-card-logo-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--background) 0%, var(--secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .review-card-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .review-card-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: 0.25rem;
+  }
+
+  .review-card-bonus {
+    font-size: 0.95rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .review-stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .star {
+    font-size: 1rem;
+  }
+
+  .star-full {
+    color: var(--primary);
+  }
+
+  .star-half {
+    color: var(--primary);
+    opacity: 0.5;
+  }
+
+  .star-empty {
+    color: var(--border);
+  }
+
+  .review-rating-num {
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  .review-card-action {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .review-card {
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .review-card-index {
+      display: none;
+    }
+    .review-card-logo,
+    .review-card-logo-placeholder {
+      width: 60px;
+      height: 60px;
+    }
+    .review-card-action {
+      width: 100%;
+    }
+    .review-card-action .btn {
+      display: block;
+      text-align: center;
+      width: 100%;
+    }
   }
 
   /* Bonuses Section */
@@ -1008,7 +1153,16 @@ const styles = `
     }
 
     header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       backdrop-filter: none;
+      z-index: 6000;
+    }
+
+    header + * {
+      margin-top: 150px;
     }
 
     .header-content {
@@ -1329,10 +1483,37 @@ export default function TupchiyTemplate() {
     }
   `;
 
-  // Mock slots data if not provided
   const slots = data.Slots && data.Slots.length > 0 ? data.Slots : []
-
   const bonuses = data.Bonuses && data.Bonuses.length > 0 ? data.Bonuses : []
+  const reviews: ReviewItem[] = Array.isArray(data.Reviews) ? data.Reviews : []
+
+  const getReviewLogoUrl = (logo?: string | MediaFile | MediaFile[]): string => {
+    if (!logo) return ''
+    if (typeof logo === 'string') return logo
+    if (Array.isArray(logo) && logo.length > 0) return logo[0].url || ''
+    if (typeof logo === 'object' && 'url' in logo) return (logo as MediaFile).url || ''
+    return ''
+  }
+
+  const renderStars = (rating: string) => {
+    const num = parseFloat(rating)
+    if (isNaN(num)) return null
+    const full = Math.floor(num)
+    const hasHalf = num - full >= 0.3
+    const empty = 5 - full - (hasHalf ? 1 : 0)
+    return (
+      <div className="review-stars">
+        {Array.from({ length: full }).map((_, i) => (
+          <span key={`f${i}`} className="star star-full">★</span>
+        ))}
+        {hasHalf && <span className="star star-half">★</span>}
+        {Array.from({ length: empty }).map((_, i) => (
+          <span key={`e${i}`} className="star star-empty">★</span>
+        ))}
+        <span className="review-rating-num">{num.toFixed(1)}</span>
+      </div>
+    )
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1462,8 +1643,6 @@ export default function TupchiyTemplate() {
                             <a
                                 href={item.link && item.link.trim() ? item.link : redirectLink}
                                 className="nav-link"
-                                target={item.open_in_new_tab ? '_blank' : '_self'}
-                                rel={item.open_in_new_tab ? 'noopener noreferrer' : undefined}
                             >
                               {item.label}
                               {item.submenu && item.submenu.length > 0 && (
@@ -1476,8 +1655,6 @@ export default function TupchiyTemplate() {
                                       <a
                                           key={subitem.id || subindex}
                                           href={subitem.link && subitem.link.trim() ? subitem.link : redirectLink}
-                                          target={subitem.open_in_new_tab ? '_blank' : '_self'}
-                                          rel={subitem.open_in_new_tab ? 'noopener noreferrer' : undefined}
                                       >
                                         {subitem.label}
                                       </a>
@@ -1489,6 +1666,7 @@ export default function TupchiyTemplate() {
                   ) : (
                       <>
                         <li><a href="#home" className="nav-link">Home</a></li>
+                        <li><a href="#reviews" className="nav-link">Reviews</a></li>
                         <li><a href="#slots" className="nav-link">Slots</a></li>
                         <li><a href="#bonuses" className="nav-link">Bonuses</a></li>
                       </>
@@ -1501,7 +1679,7 @@ export default function TupchiyTemplate() {
                         className="btn btn-outline"
                         onClick={() => {
                           const link = redirectLink ? redirectLink : '/';
-                          window.open(link, '_blank');
+                          window.location.href = link;
                         }}
                     >
                       {loginText}
@@ -1513,7 +1691,7 @@ export default function TupchiyTemplate() {
                         className="btn btn-primary"
                         onClick={() => {
                           const link = redirectLink ? redirectLink : '/';
-                          window.open(link, '_blank');
+                          window.location.href = link;
                         }}
                     >
                       {registerText}
@@ -1567,7 +1745,7 @@ export default function TupchiyTemplate() {
                   className="btn btn-primary btn-lg btn-hero color-main-btn"
                   onClick={() => {
                     const link = redirectLink ? redirectLink : '/';
-                    window.open(link, '_blank');
+                    window.location.href = link;
                   }}
               >
                 {ctaText}
@@ -1611,7 +1789,7 @@ export default function TupchiyTemplate() {
                             <div className="slot-overlay">
                               <div className="slot-background">
                                 <span className="slot-name">{slot.Name || `Slot ${index + 1}`}</span>
-                                <button className="btn btn-primary" onClick={() => slot.link && window.open(slot.link, '_blank')}>
+                                <button className="btn btn-primary" onClick={() => slot.link && (window.location.href = slot.link)}>
                                   Play
                                 </button>
                               </div>
@@ -1630,6 +1808,45 @@ export default function TupchiyTemplate() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
+                </div>
+              </div>
+            </section>
+        )}
+
+        {/* Reviews Section */}
+        {reviews.length > 0 && (
+            <section id="reviews" className="reviews-section">
+              <div className="container">
+                <h2 className="section-title">Casino Reviews</h2>
+                <div className="reviews-list">
+                  {reviews.map((review, index) => {
+                    const logoUrl = getReviewLogoUrl(review.logo)
+                    return (
+                      <div key={index} className="review-card">
+                        <div className="review-card-index">{index + 1}</div>
+                        {logoUrl ? (
+                          <img src={logoUrl} alt={review.name || `Casino ${index + 1}`} className="review-card-logo" />
+                        ) : (
+                          <div className="review-card-logo-placeholder">🎰</div>
+                        )}
+                        <div className="review-card-info">
+                          <div className="review-card-name">{review.name || `Casino ${index + 1}`}</div>
+                          {review.bonus && <div className="review-card-bonus">{review.bonus}</div>}
+                          {review.rating && renderStars(review.rating)}
+                        </div>
+                        <div className="review-card-action">
+                          {review.link && (
+                            <button
+                              className="btn btn-primary"
+                              onClick={() => window.location.href = review.link!}
+                            >
+                              {getBonusBtn}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             </section>
@@ -1823,8 +2040,6 @@ export default function TupchiyTemplate() {
                             <a
                                 href={item.link && item.link.trim() ? item.link : redirectLink}
                                 className="footer-link"
-                                target={(item.open_in_new_tab || item.openInNewTab) ? '_blank' : '_self'}
-                                rel={(item.open_in_new_tab || item.openInNewTab) ? 'noopener noreferrer' : undefined}
                             >
                               {item.label}
                             </a>
@@ -1834,8 +2049,6 @@ export default function TupchiyTemplate() {
                                       <a
                                           key={subitem.id || subindex}
                                           href={subitem.link && subitem.link.trim() ? subitem.link : redirectLink}
-                                          target={(subitem.open_in_new_tab || subitem.openInNewTab) ? '_blank' : '_self'}
-                                          rel={(subitem.open_in_new_tab || subitem.openInNewTab) ? 'noopener noreferrer' : undefined}
                                       >
                                         {subitem.label}
                                       </a>
@@ -1878,7 +2091,7 @@ export default function TupchiyTemplate() {
                     className="btn btn-primary color-main-btn"
                     onClick={() => {
                       const link = redirectLink ? redirectLink : '/';
-                      window.open(link, '_blank');
+                      window.location.href = link;
                     }}
                 >
                   {getBonusBtn}
