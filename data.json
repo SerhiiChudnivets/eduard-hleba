@@ -112,7 +112,29 @@
   ],
   "Slots": null,
   "Bonuses": null,
-  "Reviews": null,
+  "Reviews": [
+    {
+      "link": "/play",
+      "logo": "/uploads/7b1333ad1573a0f8ad14c647e5ae72e6.jpg",
+      "name": "Lucky Casino",
+      "bonus": "up to 100% 50fs",
+      "rating": "5"
+    },
+    {
+      "link": "/play2",
+      "logo": "/uploads/5db7255f6623c1b43c97dc867f14c1b2.webp",
+      "name": "Lucky Casino 2",
+      "bonus": "50fs 50fs",
+      "rating": "4.8"
+    },
+    {
+      "link": "/play3",
+      "logo": "/uploads/3f890ee6d96c8f0550ba88fc2b4a4cde.webp",
+      "name": "Lucky Casino 3",
+      "bonus": "100% win win",
+      "rating": "4.5"
+    }
+  ],
   "FAQ": [
     {
       "answer": "ans 1",
@@ -123,8 +145,8 @@
       "question": "faq 2"
     }
   ],
-  "_generated_at": "2026-08-10T14:54:55.134Z",
+  "_generated_at": "2026-08-10T14:57:59.667Z",
   "_version": "1.0.0",
-  "_last_deploy": "2026-08-10T14:54:55.722Z",
-  "_deploy_trigger": "2nj1md"
+  "_last_deploy": "2026-08-10T14:58:00.272Z",
+  "_deploy_trigger": "txnjql"
 }
